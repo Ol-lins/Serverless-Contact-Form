@@ -23,7 +23,10 @@ When a user submits the form, the request is processed through API Gateway, exec
 5. The user sees a success/failure message on the page.
 
 ## 📷 Demo Screenshot
-(Add a screenshot of your form here once deployed.)
+<img width="1227" height="775" alt="image" src="https://github.com/user-attachments/assets/994425cc-5448-488f-9cb6-0e9d4cd6ea92" />
+
 
 👨‍💻 **Author:** Collins Obeng Oduro
+
+
 🌍 Built as part of a Cloud Computing assignment under the Azubi Africa Cloud Intensive Program.  
