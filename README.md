@@ -1,3 +1,5 @@
+![Architecture Flow](reference-image.png)
+
 # Contact Form – Serverless Project
 
 This is a **serverless contact form** built with **AWS Lambda, API Gateway, and SES**, and hosted on **GitHub Pages**.
