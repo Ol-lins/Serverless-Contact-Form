@@ -4,34 +4,26 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Contact Us</title>
-  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <div class="container">
-    <h1>Contact Us</h1>
+  <h1>Contact Us</h1>
 
-    <form id="contactForm" class="contact-form">
-      <input id="name" type="text" placeholder="Your Name" required />
-      <input id="email" type="email" placeholder="Your Email" required />
-      <textarea id="message" rows="6" placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
-      <p id="status"></p>
-    </form>
-  </div>
+  <form id="contactForm">
+    <input id="name" type="text" placeholder="Your Name" required />
+    <input id="email" type="email" placeholder="Your Email" required />
+    <textarea id="message" rows="6" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+    <p id="status"></p>
+  </form>
 
   <script>
     const API_URL = "https://4v7fld4mo4.execute-api.us-east-1.amazonaws.com/prod/contact-us";
     const form = document.getElementById('contactForm');
     const statusEl = document.getElementById('status');
-    const submitBtn = form.querySelector("button");
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       statusEl.textContent = '';
-      
-      // Show spinner
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = `<span class="spinner"></span> Sending...`;
 
       const payload = {
         name: document.getElementById('name').value.trim(),
@@ -48,23 +40,11 @@
 
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Failed to send');
-
         statusEl.textContent = data.message || 'Message Sent!';
-        statusEl.style.color = "green";
       } catch (err) {
-        console.error("Contact form error:", err); // developer log
         statusEl.textContent = 'Failed to send. Please try again.';
-        statusEl.style.color = "red";
-      } finally {
-        // Reset button
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Send Message";
       }
     });
   </script>
 </body>
 </html>
-
-
-
-
