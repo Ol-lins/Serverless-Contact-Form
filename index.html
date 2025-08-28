@@ -1,51 +1,70 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Contact Us</title>
+	<title>Pravin Mishra</title>
+  <script language="JavaScript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
+	<script>
+		function submitToAPI(e) {
+            e.preventDefault();
+            var URL = "https://b0yfgy0o2m.execute-api.ap-south-1.amazonaws.com/stage/contact_us";
+
+            var name = $("#name-input").val();
+            var email = $("#email-input").val();
+            var message = $("#message-input").val();
+            var data = {
+               name : name,
+               email : email,
+               message : message
+             };
+
+            $.ajax({
+              type: "POST",
+              url : "https://b0yfgy0o2m.execute-api.ap-south-1.amazonaws.com/stage/contact_us",
+              dataType: "json",
+              crossDomain: "true",
+              contentType: "application/json; charset=utf-8",
+              data: JSON.stringify(data),
+
+              
+              success: function () {
+                // clear form and show a success message
+                alert("Thanks for contacting us, we will get back to you soon");
+                document.getElementById("contact-form").reset();
+            location.reload();
+              },
+              error: function () {
+                // show an error message
+                alert("UnSuccessfull");
+              }});
+          }
+	</script>
+
 </head>
 <body>
-  <h1>Contact Us</h1>
 
-  <form id="contactForm">
-    <input id="name" type="text" placeholder="Your Name" required />
-    <input id="email" type="email" placeholder="Your Email" required />
-    <textarea id="message" rows="6" placeholder="Your Message" required></textarea>
-    <button type="submit">Send Message</button>
-    <p id="status"></p>
-  </form>
+	<h1>Serverless Webinar: Pravin Mishra</h1>
+	<div>
+		<form action="" method="post">
+			<div class="section-title">
+				<h2>Contact us <small>we love conversations. Let us talk!</small></h2>
+			</div>
 
-  <script>
-    const API_URL = "https://ylvkozic31.execute-api.us-east-1.amazonaws.com/prod/contact-us";
-    const form = document.getElementById('contactForm');
-    const statusEl = document.getElementById('status');
+			<div>
+				<input type="text" id="name-input" placeholder="Enter full name" name="name" required="">
+				<br>
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      statusEl.textContent = '';
+				<input type="email" id="email-input" placeholder="Enter email address" name="email" required="">
+				<br>
 
-      const payload = {
-        name: document.getElementById('name').value.trim(),
-        email: document.getElementById('email').value.trim(),
-        message: document.getElementById('message').value.trim()
-      };
+				<textarea id="message-input" rows="6" placeholder="Tell us about your message" name="message" required=""></textarea>
+				<br>
+			</div>
 
-      try {
-        const res = await fetch(API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
+			<div>
+				<input type="submit" onClick="submitToAPI(event)" name="send message" value="Send Message">
+			</div>
 
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || 'Failed to send');
-        statusEl.textContent = data.message || 'Message Sent!';
-      } catch (err) {
-        statusEl.textContent = 'Failed to send. Please try again.';
-      }
-    });
-  </script>
+		</form>
+	</div>
 </body>
 </html>
-
